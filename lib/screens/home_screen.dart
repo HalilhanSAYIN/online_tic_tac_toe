@@ -32,8 +32,10 @@ class HomeScreen extends StatelessWidget {
                 decoration: const InputDecoration(
                     label: Text("Nickname"), border: OutlineInputBorder()),
               ),
-              const ElevatedButton(
-                onPressed: signInAnonymously,
+              ElevatedButton(
+                onPressed: () {
+                  signInAnonymously(context);
+                },
                 child: Text('Sign In'),
               ),
             ],
@@ -43,5 +45,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-

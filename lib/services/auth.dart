@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-Future<void> signInAnonymously() async {
+Future<void> signInAnonymously(context) async {
   try {
     UserCredential userCredential = await _auth.signInAnonymously();
     User? user = userCredential.user;
@@ -14,6 +16,7 @@ Future<void> signInAnonymously() async {
         'uid': user.uid,
         'createdAt': Timestamp.now(),
       });
+      Navigator.push(context, MaterialPageRoute(builder: (context) => GamesListScreen(),));
       print('signing succes');
     }
   } catch (e) {
