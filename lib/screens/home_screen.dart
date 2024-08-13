@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tic Tac Toe'),
+        title: const  Text('Tic Tac Toe'),
       ),
       body: Center(
         child: Padding(
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   signInAnonymously(context);
                 },
-                child: Text('Sign In'),
+                child: const Text('Sign In'),
               ),
             ],
           ),

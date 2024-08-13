@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:online_tic_tac_toe/screens/game_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> createGame() async {
+  Future<void> createGame(context) async {
     try {
       User? user = _auth.currentUser;
       if (user != null) {
@@ -23,9 +25,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
         });
 
         print('Game created successfully with ID: ${gameRef.id}');
-        /**
-         nav to game screen
-         */
+         Navigator.push(context, MaterialPageRoute(builder: (context) => GameScreen(gameId: gameRef.id ,),));
       }
     } catch (e) {
       print('Error creating game: $e');

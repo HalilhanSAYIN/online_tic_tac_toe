@@ -15,10 +15,12 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       appBar: AppBar(
         title: const Text('Create Game'),
       ),
-      body:  const Center(
+      body:   Center(
         child: ElevatedButton(
-          onPressed: createGame,
-          child: Text('Create Tic Tac Toe Game'),
+          onPressed: () {
+            createGame(context);
+          },
+          child:  const Text('Create Tic Tac Toe Game'),
         ),
       ),
     );

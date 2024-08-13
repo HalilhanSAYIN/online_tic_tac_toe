@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
+import 'package:online_tic_tac_toe/screens/lobby_screen.dart';
 
 
 class GamesListScreen extends StatefulWidget {
@@ -23,9 +24,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
           'player2': user.uid, 
           'status': 'in_progress', 
         });
-       /* 
-       Nav to lobby
-            ));*/
+        Navigator.push(context, MaterialPageRoute(builder: (context) => GameLobbyScreen(gameId: gameId,),));
         print('Joined the game successfully');
       }
     } catch (e) {
