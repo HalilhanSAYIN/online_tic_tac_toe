@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/screens/home_screen.dart';
+import 'package:online_tic_tac_toe/screens/splash_screen.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           seedColor: secondaryColor),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

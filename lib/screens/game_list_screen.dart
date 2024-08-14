@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
 import 'package:online_tic_tac_toe/screens/lobby_screen.dart';
+import 'package:online_tic_tac_toe/services/shared_pref.dart';
 
 
 class GamesListScreen extends StatefulWidget {
@@ -37,6 +38,9 @@ class _GamesListScreenState extends State<GamesListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Games List'),
+        actions: [IconButton(onPressed: () {
+          clearUserData(context);
+        }, icon: Icon(Icons.logout))],
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGameScreen(),));
