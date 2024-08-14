@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
 import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
 import 'package:online_tic_tac_toe/widgets/dialogs/logout_dialog.dart';
@@ -23,6 +22,7 @@ class HomeScreen extends StatelessWidget {
           title: const Text('Tic Tac Toe'),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Welcome ${nickName ?? ""}",
+                      "Online Tic Tac Toe ${nickName ?? ""}",
                       style: TextStyle(fontSize: 32),
                     ),
                   ),
@@ -43,8 +43,9 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
-            Padding(
+            Column(
+              children: [
+ Padding(
               padding: const EdgeInsets.symmetric(vertical: 18.0),
               child: GestureDetector(
                 onTap: () {
@@ -92,7 +93,10 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
+            
+              ],
+            ),
+           
             IconButton(
                 onPressed: () {
                   showLogOutDialog(context);

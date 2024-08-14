@@ -1,25 +1,28 @@
 class GameLogic {
-
   
-  List<List<String>> parseBoard(String boardString) {
+  List<List<String>> parseBoard(String boardString, int boardSize) {
     return boardString.split('|').map((row) => row.split(',')).toList();
   }
 
   String checkWinner(List<List<String>> board) {
-    for (int i = 0; i < 3; i++) {
-      if (board[i][0] != '' && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+    int size = board.length;
+
+    // Satırları ve sütunları kontrol et
+    for (int i = 0; i < size; i++) {
+      if (board[i].every((cell) => cell == board[i][0] && cell != '')) {
         return board[i][0];
       }
-      if (board[0][i] != '' && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+      if (List.generate(size, (index) => board[index][i]).every((cell) => cell == board[0][i] && cell != '')) {
         return board[0][i];
       }
     }
 
-    if (board[0][0] != '' && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+    // Çaprazları kontrol et
+    if (List.generate(size, (index) => board[index][index]).every((cell) => cell == board[0][0] && cell != '')) {
       return board[0][0];
     }
-    if (board[0][2] != '' && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
-      return board[0][2];
+    if (List.generate(size, (index) => board[index][size - index - 1]).every((cell) => cell == board[0][size - 1] && cell != '')) {
+      return board[0][size - 1];
     }
 
     return '';
@@ -28,13 +31,16 @@ class GameLogic {
   bool isBoardFull(List<List<String>> board) {
     for (var row in board) {
       for (var cell in row) {
-        if (cell == '') {
-          return false;
-        }
+        if(cell == '') return false;
+}
+}
+return true;
+}
+void resetBoard(List<List<String>> board) {
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[i].length; j++) {
+        board[i][j] = '';
       }
     }
-    return true;
   }
 }
-
-

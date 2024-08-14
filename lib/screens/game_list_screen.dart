@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
 import 'package:online_tic_tac_toe/screens/game_screen.dart';
-import 'package:online_tic_tac_toe/screens/lobby_screen.dart';
-import 'package:online_tic_tac_toe/services/shared_pref.dart';
+
 
 
 class GamesListScreen extends StatefulWidget {
@@ -45,7 +44,9 @@ class _GamesListScreenState extends State<GamesListScreen> {
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGameScreen(),));
-      },),
+      },
+      child: Icon(Icons.add),
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore
             .collection('games')
