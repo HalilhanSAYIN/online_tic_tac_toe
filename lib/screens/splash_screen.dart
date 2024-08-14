@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
 import 'package:online_tic_tac_toe/screens/home_screen.dart';
+import 'package:online_tic_tac_toe/screens/login_screen.dart';
 import 'package:online_tic_tac_toe/services/shared_pref.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,10 +11,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
+  String nickName = "";
   Future<bool> checkUserStatus() async {
     Map<String, String?> userData = await getUserData();
     if (userData['uuid'] != null && userData['nickname'] != null) {
+      nickName = userData['nickname'].toString();
       return true;
     } else {
       return false;
@@ -27,14 +29,14 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => GamesListScreen(),
+            builder: (context) => HomeScreen(nickName: nickName,),
           ),
         );
       } else {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const LoginScreen(),
           ),
         );
       }

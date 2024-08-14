@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
+import 'package:online_tic_tac_toe/screens/home_screen.dart';
 import 'package:online_tic_tac_toe/services/shared_pref.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -20,11 +20,11 @@ Future<void> signInAnonymously(context, String nickname) async {
       }).then((value) {
         saveUserData(user.uid, nickname);
       });      
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => GamesListScreen(),
-          ));
+            builder: (context) => HomeScreen(nickName: nickname,),
+          ), (route) => false,);
       print('signing succes');
     }
   } catch (e) {

@@ -38,9 +38,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Games List'),
-        actions: [IconButton(onPressed: () {
-          clearUserData(context);
-        }, icon: Icon(Icons.logout))],
+       
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGameScreen(),));
@@ -62,7 +60,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
               final gameId = game.id;
               return ListTile(
                 title: Text('Game ID: $gameId'),
-                subtitle: Text('Created by: ${game['nickname'] }'),
+                subtitle: Text('Created by: ${game['player1nickname'] }'),
                 trailing: ElevatedButton(
                   onPressed: () => _joinGame(gameId),
                   child: const Text('Join Game'),

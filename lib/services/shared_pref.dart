@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_tic_tac_toe/screens/home_screen.dart';
+import 'package:online_tic_tac_toe/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> saveUserData(String uuid, String nickname) async {
@@ -20,9 +20,9 @@ Future<void> clearUserData(context) async {
   await prefs.remove('uuid');
   await prefs.remove('nickname');
 
-   Navigator.pushReplacement(
+   Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ));
+          builder: (context) => const LoginScreen(),
+        ),(route) => false,);
 }

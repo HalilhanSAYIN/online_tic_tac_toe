@@ -1,86 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:online_tic_tac_toe/services/auth.dart';
-
-final nickNameTextEditingController = TextEditingController();
+import 'package:flutter/widgets.dart';
+import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
+import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
+import 'package:online_tic_tac_toe/widgets/dialogs/logout_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final String nickName; 
+   HomeScreen({super.key , required this.nickName});
+
+  @override
+  
   @override
   Widget build(BuildContext context) {
     final pageWidth = MediaQuery.of(context).size.width;
+    final pageHeiht = MediaQuery.of(context).size.height;
+   
+    
     const backgroundColor = Color(0xFFFEFAF0);
     return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: const Text('Tic Tac Toe'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.asset(
-                      "assets/logo.png",
-                      width: 300,
-                      height: 300,
-                    ),
-                    const Text(
-                      "TIC TAC TOE",
-                      style: TextStyle(fontSize: 24),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 24.0),
-                  child: SizedBox(
-                    width: pageWidth * 0.7,
-                    child: TextFormField(
-                      controller: nickNameTextEditingController,
-                      decoration: const InputDecoration(
-                          label: Text("Nickname"),
-                          border: OutlineInputBorder()),
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          title: const Text('Tic Tac Toe'),
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Welcome ${nickName}",
+                      style: TextStyle(fontSize: 32),
                     ),
                   ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(elevation: 10),
-                  onPressed: () {
-                    if (nickNameTextEditingController.text == "" ||
-                        nickNameTextEditingController.text.length < 3) {
-                      ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
-                          content:
-                              Text("Nickname must be at least 3 characters!")));
-                    } else {
-                      signInAnonymously(
-                          context, nickNameTextEditingController.text);
-                    }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  Icon(
+                    Icons.waving_hand_outlined,
+                    color: Colors.amber[500],
+                    size: 100,
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CreateGameScreen(),));
+                },
+                child: Card(
+                  child: SizedBox(
+                    width: pageWidth * 0.8,
+                    height: pageHeiht * 0.2,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.play_arrow_sharp,
-                          size: 72,
+                          Icons.add,
+                          size: pageHeiht * 0.1,
                         ),
-                        const Text(
-                          'Sign In',
-                          style: TextStyle(fontSize: 24),
-                        ),
+                        Text("New Game", style: TextStyle(fontSize: 32))
                       ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 18.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => GamesListScreen(),));
+                },
+                child: Card(
+                  child: SizedBox(
+                    width: pageWidth * 0.8,
+                    height: pageHeiht * 0.2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.list,
+                          size: pageHeiht * 0.1,
+                        ),
+                        Text("Game List", style: TextStyle(fontSize: 32))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Spacer(),
+            IconButton(
+                onPressed: () {
+                  showLogOutDialog(context);
+                },
+                icon: const Icon(Icons.logout))
+          ],
+        ));
   }
 }

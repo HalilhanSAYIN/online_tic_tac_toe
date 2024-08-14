@@ -5,28 +5,6 @@ class GameService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<DocumentReference> createGame() async {
-    
-    
-    User? user = _auth.currentUser;
-    if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
-        String nickName = userDoc['nickname'];
-      String board = List.generate(3, (_) => List.generate(3, (_) => '').join(',')).join('|');
-      DocumentReference gameRef = await _firestore.collection('games').add({
-        'player1': user.uid,
-        'player1Nickname': nickName,
-        'player2': null,
-        'status': 'waiting',
-        'board': board,
-        'turn': 'player1',
-        'createdAt': Timestamp.now(),
-      });
-      return gameRef;
-    }
-    throw Exception('User not authenticated');
-  }
-
   Future<void> joinGame(String gameId) async {
     User? user = _auth.currentUser;
     if (user != null) {
