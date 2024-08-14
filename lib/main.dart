@@ -17,11 +17,15 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+     const backgroundColor = Color(0xFFFEFAF0);
+     const secondaryColor = Color.fromARGB(255, 124, 197, 100);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          background: backgroundColor,
+          seedColor: secondaryColor),
         useMaterial3: true,
       ),
       home: HomeScreen(),

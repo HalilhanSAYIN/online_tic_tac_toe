@@ -7,13 +7,15 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> createGame(context) async {
-    try {
+   try {
       User? user = _auth.currentUser;
       if (user != null) {
         String board =
             List.generate(3, (_) => List.generate(3, (_) => '').join(','))
                 .join('|');
-
+         DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        String nickName = userDoc['nickname'];
+    
         DocumentReference gameRef = await _firestore.collection('games').add({
           'player1': user.uid,
           'player2': null,
@@ -22,6 +24,8 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
           'createdAt': Timestamp.now(),
           'currentPlayer': user.uid, 
           'turn': 'player1',
+          'player1nickname' : nickName,
+          'player2nickname' : null
         });
 
         print('Game created successfully with ID: ${gameRef.id}');

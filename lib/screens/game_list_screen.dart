@@ -58,7 +58,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
               final gameId = game.id;
               return ListTile(
                 title: Text('Game ID: $gameId'),
-                subtitle: Text('Created by: ${game['player1']}'),
+                subtitle: Text('Created by: ${game['nickname'] }'),
                 trailing: ElevatedButton(
                   onPressed: () => _joinGame(gameId),
                   child: const Text('Join Game'),

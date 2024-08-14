@@ -5,7 +5,6 @@ import 'package:online_tic_tac_toe/core/game_logic.dart';
 import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
 import 'package:online_tic_tac_toe/services/game_service.dart';
 
-
 class GameScreen extends StatefulWidget {
   final String gameId;
 
@@ -23,12 +22,10 @@ class _GameScreenState extends State<GameScreen> {
   late String _playerSymbol;
   late String _turn;
 
-
   @override
   void initState() {
     super.initState();
     _initializeGame();
-    
   }
 
   Future<void> _initializeGame() async {
@@ -62,7 +59,8 @@ class _GameScreenState extends State<GameScreen> {
         });
       } else {
         String nextTurn = _turn == 'player1' ? 'player2' : 'player1';
-        await _gameService.updateBoard(widget.gameId, _board, nextTurn, row, col);
+        await _gameService.updateBoard(
+            widget.gameId, _board, nextTurn, row, col);
       }
     }
   }
@@ -80,7 +78,11 @@ class _GameScreenState extends State<GameScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => GamesListScreen(),)); // Oyun ekranından çık
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GamesListScreen(),
+                  )); // Oyun ekranından çık
             },
             child: Text('Ok'),
           ),
@@ -90,16 +92,15 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void checkGameState(gameRef) {
-  String winner = _gameLogic.checkWinner(_board);
-  if (winner.isNotEmpty) {
-    _showGameEndDialog('$winner kazandı!');
-    gameRef.update({'status': 'finished'});
-  } else if (_gameLogic.isBoardFull(_board)) {
-    _showGameEndDialog('Berabere!');
-    gameRef.update({'status': 'draw'});
+    String winner = _gameLogic.checkWinner(_board);
+    if (winner.isNotEmpty) {
+      _showGameEndDialog('$winner kazandı!');
+      gameRef.update({'status': 'finished'});
+    } else if (_gameLogic.isBoardFull(_board)) {
+      _showGameEndDialog('Berabere!');
+      gameRef.update({'status': 'draw'});
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -117,10 +118,13 @@ class _GameScreenState extends State<GameScreen> {
           var gameData = snapshot.data!.data() as Map<String, dynamic>;
           _board = _gameLogic.parseBoard(gameData['board']);
           _turn = gameData['turn'];
-
+          String player1Nickname = gameData['player1Nickname'] ?? 'Player 1';
+          String player2Nickname = gameData['player2Nickname'] ?? 'Player 2';
           return Column(
             children: [
-              Text('Current Turn: ${_turn == 'player1' ? 'Player 1' : 'Player 2'}'),
+              
+              Text(
+                  'Current Turn: ${_turn == player1Nickname ? player1Nickname : player2Nickname}'),
               Expanded(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -132,8 +136,9 @@ class _GameScreenState extends State<GameScreen> {
                     int col = index % 3;
 
                     return GestureDetector(
-                      onTap: () { _handleMove(row, col);
-                      checkGameState(widget.gameId);
+                      onTap: () {
+                        _handleMove(row, col);
+                        checkGameState(widget.gameId);
                       },
                       child: Container(
                         decoration: BoxDecoration(
