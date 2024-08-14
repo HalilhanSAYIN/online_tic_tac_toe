@@ -5,8 +5,8 @@ import 'package:online_tic_tac_toe/screens/game_list_screen.dart';
 import 'package:online_tic_tac_toe/widgets/dialogs/logout_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
-  final String nickName; 
-   HomeScreen({super.key , required this.nickName});
+   String? nickName; 
+   HomeScreen(this.nickName);
 
   @override
   
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Welcome ${nickName}",
+                      "Welcome ${nickName ?? ""}",
                       style: TextStyle(fontSize: 32),
                     ),
                   ),
@@ -43,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+            
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 18.0),
               child: GestureDetector(

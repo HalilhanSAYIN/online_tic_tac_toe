@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
+import 'package:online_tic_tac_toe/screens/game_screen.dart';
 import 'package:online_tic_tac_toe/screens/lobby_screen.dart';
 import 'package:online_tic_tac_toe/services/shared_pref.dart';
 
@@ -20,12 +21,14 @@ class _GamesListScreenState extends State<GamesListScreen> {
     try {
       User? user = _auth.currentUser;
       if (user != null) {
-        
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        String nickName = userDoc['nickname'];
         await _firestore.collection('games').doc(gameId).update({
           'player2': user.uid, 
+          'player2nickname': nickName,
           'status': 'in_progress', 
         });
-        Navigator.push(context, MaterialPageRoute(builder: (context) => GameLobbyScreen(gameId: gameId,),));
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => GameScreen(gameId: gameId,),),(route) => false,);
         print('Joined the game successfully');
       }
     } catch (e) {

@@ -23,7 +23,7 @@ Future<void> signInAnonymously(context, String nickname) async {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(nickName: nickname,),
+            builder: (context) => HomeScreen(nickname,),
           ), (route) => false,);
       print('signing succes');
     }

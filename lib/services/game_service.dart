@@ -12,12 +12,21 @@ class GameService {
         String nickName = userDoc['nickname'];
       await _firestore.collection('games').doc(gameId).update({
         'player2': user.uid,
-        'player2Nickname' : nickName,
+        'player2nickname' : nickName,
         'status': 'in_progress',
       });
     }
   }
 
+Future<void> cancelGame(String gameId) async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      await _firestore.collection('games').doc(gameId).update({
+        'status': 'cancelled',
+      });
+    }
+  }
+  
   Future<void> updateBoard(String gameId, List<List<String>> board, String nextTurn, int row, int col) async {
     User? user = _auth.currentUser;
     if (user != null) {
