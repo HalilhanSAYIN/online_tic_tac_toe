@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:online_tic_tac_toe/screens/game_create_screen.dart';
 import 'package:online_tic_tac_toe/screens/game_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -37,7 +38,7 @@ Future<void> createGame(context,selectedBoardColor,player1SelectedIcon,player2Se
         'winnericon' : null
       });
 
-     
+      gameCreateLoadingController = false; 
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

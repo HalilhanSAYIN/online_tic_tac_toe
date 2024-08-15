@@ -7,7 +7,6 @@ class GameLogic {
   String checkWinner(List<List<String>> board) {
     int size = board.length;
 
-    // Satırları ve sütunları kontrol et
     for (int i = 0; i < size; i++) {
       if (board[i].every((cell) => cell == board[i][0] && cell != '')) {
         return board[i][0];
@@ -17,7 +16,6 @@ class GameLogic {
       }
     }
 
-    // Çaprazları kontrol et
     if (List.generate(size, (index) => board[index][index]).every((cell) => cell == board[0][0] && cell != '')) {
       return board[0][0];
     }

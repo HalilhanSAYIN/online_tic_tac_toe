@@ -229,10 +229,7 @@ class _GameScreenState extends State<GameScreen> {
                   const EdgeInsets.symmetric(vertical: 22.0, horizontal: 8.0),
               child: Column(
                 children: [
-                  Text(
-                    'Current Turn: ${_turn == player1Nickname ? player1Nickname : player2Nickname}',
-                    style: defaultFontSize,
-                  ),
+                  
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(

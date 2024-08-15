@@ -1,11 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/const/text_styles.dart';
 import 'package:online_tic_tac_toe/services/auth.dart';
 
 final nickNameTextEditingController = TextEditingController();
+bool authLoadingController = false;
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final pageWidth = MediaQuery.of(context).size.width;
@@ -51,6 +59,9 @@ class LoginScreen extends StatelessWidget {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(elevation: 10),
                   onPressed: () {
+                    setState(() {
+                      authLoadingController = true;
+                    });
                     if (nickNameTextEditingController.text == "" ||
                         nickNameTextEditingController.text.length < 3) {
                       ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
@@ -61,9 +72,11 @@ class LoginScreen extends StatelessWidget {
                           context, nickNameTextEditingController.text);
                     }
                   },
-                  child: const Padding(
-                    padding:  EdgeInsets.all(8.0),
-                    child: Column(
+                  child:  Padding(
+                    padding: const   EdgeInsets.all(8.0),
+                    child: 
+                    authLoadingController == false ?  
+                   const  Column(
                       children: [
                         Icon(
                           Icons.play_arrow_sharp,
@@ -74,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                           style: defaultFontSize,
                         ),
                       ],
-                    ),
+                    ) :  const CupertinoActivityIndicator()
                   ),
                 ),
               ],

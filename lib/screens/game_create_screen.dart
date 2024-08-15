@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/const/general_consts.dart';
 import 'package:online_tic_tac_toe/const/text_styles.dart';
@@ -7,7 +8,7 @@ import 'package:online_tic_tac_toe/services/create_game.dart';
 var selectedBoardColor = colors[0];
 var player1SelectedIcon = icons[0];
 var player2SelectedIcon = icons[1];
-
+bool gameCreateLoadingController = false ; 
 
 class CreateGameScreen extends StatefulWidget {
   @override
@@ -149,6 +150,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           ElevatedButton(
             onPressed: () {
               if (player1SelectedIcon != player2SelectedIcon) {
+                setState(() {
+                  gameCreateLoadingController = true;
+                });
                  createGame(context, selectedBoardColor, player1SelectedIcon,
                   player2SelectedIcon, boardSize);
               }else{
@@ -156,9 +160,11 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
               }
              
             },
-            child:const  Padding(
-              padding:  EdgeInsets.all(16.0),
-              child: Column(
+            child:  Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: 
+              gameCreateLoadingController == false ? 
+            const  Column(
                 children: [
                   Icon(Icons.add, size: 70),
                   Text(
@@ -166,7 +172,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ],
-              ),
+              ) : const CupertinoActivityIndicator()
             ),
           ),
         ],
