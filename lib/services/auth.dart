@@ -25,7 +25,7 @@ Future<void> signInAnonymously(context, String nickname) async {
           MaterialPageRoute(
             builder: (context) => HomeScreen(nickname,),
           ), (route) => false,);
-      print('signing succes');
+      
     }
   } catch (e) {
     print('Error signing : $e');

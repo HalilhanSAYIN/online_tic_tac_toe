@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_tic_tac_toe/const/general_consts.dart';
+import 'package:online_tic_tac_toe/const/text_styles.dart';
 import 'package:online_tic_tac_toe/services/create_game.dart';
 
 
@@ -23,10 +24,10 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
+          const Text(
             "You can choose the color of the board and the icon of the first and second user as you wish.",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24),
+            style: defaultFontSize,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -35,9 +36,9 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Board Color : ",
-                      style: TextStyle(fontSize: 24),
+                      style: defaultFontSize,
                     ),
                     DropdownButton<Color>(
                       value: selectedBoardColor,
@@ -62,16 +63,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Player 1 Icon : ",
-                      style: TextStyle(fontSize: 24),
+                      style: defaultFontSize,
                     ),
                     DropdownButton<String>(
                       value: player1SelectedIcon,
                       items: icons.map((String icon) {
                         return DropdownMenuItem<String>(
                           value: icon,
-                          child: Text(icon, style: TextStyle(fontSize: 24)),
+                          child: Text(icon, style: defaultFontSize),
                         );
                       }).toList(),
                       onChanged: (String? newIcon) {
@@ -85,16 +86,16 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Player 2 Icon : ",
-                      style: TextStyle(fontSize: 24),
+                      style: defaultFontSize,
                     ),
                     DropdownButton<String>(
                       value: player2SelectedIcon,
                       items: icons.map((String icon) {
                         return DropdownMenuItem<String>(
                           value: icon,
-                          child: Text(icon, style: TextStyle(fontSize: 24)),
+                          child: Text(icon, style: defaultFontSize),
                         );
                       }).toList(),
                       onChanged: (String? newIcon) {
@@ -111,8 +112,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
           Column(
             children: [
               RadioListTile<int>(
-                title: Text('3 x 3'),
-                subtitle: Text('Classic X O X'),
+                title: const Text('3 x 3'),
+                subtitle: const Text('Classic X O X'),
                 value: 3,
                 groupValue: boardSize,
                 onChanged: (value) {
@@ -122,8 +123,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 },
               ),
               RadioListTile<int>(
-                title: Text('4 x 4'),
-                subtitle: Text('Little bit harder'),
+                title: const Text('4 x 4'),
+                subtitle: const Text('Little bit harder'),
                 value: 4,
                 groupValue: boardSize,
                 onChanged: (value) {
@@ -133,8 +134,8 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                 },
               ),
               RadioListTile<int>(
-                title: Text('5 x 5'),
-                subtitle: Text('Hardest'),
+                title: const Text('5 x 5'),
+                subtitle: const Text('Hardest'),
                 value: 5,
                 groupValue: boardSize,
                 onChanged: (value) {
@@ -151,7 +152,7 @@ class _CreateGameScreenState extends State<CreateGameScreen> {
                  createGame(context, selectedBoardColor, player1SelectedIcon,
                   player2SelectedIcon, boardSize);
               }else{
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Icons must be different!!")));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Icons must be different!!")));
               }
              
             },

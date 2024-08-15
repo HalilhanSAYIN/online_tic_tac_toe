@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_tic_tac_toe/const/text_styles.dart';
 import 'package:online_tic_tac_toe/services/auth.dart';
 
 final nickNameTextEditingController = TextEditingController();
@@ -30,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const Text(
                       "TIC TAC TOE",
-                      style: TextStyle(fontSize: 24),
+                      style: defaultFontSize,
                     )
                   ],
                 ),
@@ -70,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                          Text(
                           'Sign In',
-                          style: TextStyle(fontSize: 24),
+                          style: defaultFontSize,
                         ),
                       ],
                     ),
