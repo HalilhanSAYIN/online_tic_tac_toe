@@ -229,7 +229,6 @@ class _GameScreenState extends State<GameScreen> {
                   const EdgeInsets.symmetric(vertical: 22.0, horizontal: 8.0),
               child: Column(
                 children: [
-                  
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
@@ -278,7 +277,7 @@ class _GameScreenState extends State<GameScreen> {
                         builder: (context) {
                           return AlertDialog(
                             title: const Text("Are you sure?"),
-                            content: const Text("You will be lost"),
+                            content: const Text("This will end the game"),
                             actions: [
                               ElevatedButton(
                                   onPressed: () {
@@ -291,8 +290,7 @@ class _GameScreenState extends State<GameScreen> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => HomeScreen(
-                                            gameData['player1nickname'],
+                                          builder: (context) =>  const SplashScreen(
                                           ),
                                         ),
                                         (route) => false);
